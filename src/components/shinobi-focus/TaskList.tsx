@@ -1,5 +1,6 @@
 import type { Task } from '@/lib/types';
 import { TaskItem } from './TaskItem';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 interface TaskListProps {
   tasks: Task[];
@@ -8,25 +9,26 @@ interface TaskListProps {
 }
 
 export function TaskList({ tasks, onToggle, onDelete }: TaskListProps) {
-  const sortedTasks = [...tasks].sort((a, b) => {
-    if (a.completed === b.completed) return 0;
-    return a.completed ? 1 : -1;
-  });
-
-  if (tasks.length === 0) {
-    return (
-      <div className="text-center text-muted-foreground py-16">
-        <p>Your mission log is empty.</p>
-        <p>Accept a new mission to begin your training!</p>
-      </div>
-    );
-  }
 
   return (
-    <div className="p-4 md:p-8 space-y-3">
-      {sortedTasks.map((task) => (
-        <TaskItem key={task.id} task={task} onToggle={onToggle} onDelete={onDelete} />
-      ))}
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Pending Missions</CardTitle>
+      </CardHeader>
+      <CardContent>
+        {tasks.length === 0 ? (
+           <div className="text-center text-muted-foreground py-8">
+             <p>Your mission log is clear.</p>
+             <p>Accept a new mission to begin your training!</p>
+           </div>
+        ) : (
+          <div className="space-y-3">
+            {tasks.map((task) => (
+              <TaskItem key={task.id} task={task} onToggle={onToggle} onDelete={onDelete} />
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }

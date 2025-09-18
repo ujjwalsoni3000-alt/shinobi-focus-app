@@ -5,6 +5,7 @@ import { Header } from '@/components/shinobi-focus/Header';
 import { ProgressDashboard } from '@/components/shinobi-focus/ProgressDashboard';
 import { TaskForm } from '@/components/shinobi-focus/TaskForm';
 import { TaskList } from '@/components/shinobi-focus/TaskList';
+import { MissionLog } from '@/components/shinobi-focus/MissionLog';
 import type { Task } from '@/lib/types';
 import type { MissionRankName } from '@/lib/types';
 import { MISSION_RANKS } from '@/lib/ranks';
@@ -44,6 +45,8 @@ export default function Home() {
       rank,
       chakra: MISSION_RANKS[rank].chakra,
       completed: false,
+      createdAt: Date.now(),
+      completedAt: null,
     };
     setTasks([newTask, ...tasks]);
   };
@@ -51,7 +54,11 @@ export default function Home() {
   const handleToggleTask = (id: string) => {
     setTasks(
       tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+        task.id === id ? { 
+          ...task, 
+          completed: !task.completed,
+          completedAt: !task.completed ? Date.now() : null
+        } : task
       )
     );
   };
@@ -59,6 +66,8 @@ export default function Home() {
   const handleDeleteTask = (id: string) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
+  
+  const pendingTasks = tasks.filter(task => !task.completed);
 
   if (!isMounted) {
     return null; 
@@ -68,13 +77,16 @@ export default function Home() {
     <main className="min-h-screen bg-background font-body">
       <Header />
       <ProgressDashboard tasks={tasks} userName={USER_NAME} />
-      <div className="container mx-auto max-w-3xl">
-        <TaskForm onAddTask={handleAddTask} />
-        <TaskList 
-          tasks={tasks} 
-          onToggle={handleToggleTask}
-          onDelete={handleDeleteTask}
-        />
+      <div className="container mx-auto max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
+        <div className="space-y-8">
+          <TaskForm onAddTask={handleAddTask} />
+          <TaskList 
+            tasks={pendingTasks} 
+            onToggle={handleToggleTask}
+            onDelete={handleDeleteTask}
+          />
+        </div>
+        <MissionLog allTasks={tasks} />
       </div>
       <footer className="text-center p-8 text-muted-foreground text-sm">
         <p>Train hard, {USER_NAME}. Your path to greatness awaits.</p>

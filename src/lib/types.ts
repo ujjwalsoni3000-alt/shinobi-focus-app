@@ -6,6 +6,8 @@ export interface Task {
   rank: MissionRankName;
   chakra: number;
   completed: boolean;
+  createdAt: number; // Store as timestamp
+  completedAt: number | null; // Store as timestamp
 }
 
 export interface NinjaRank {

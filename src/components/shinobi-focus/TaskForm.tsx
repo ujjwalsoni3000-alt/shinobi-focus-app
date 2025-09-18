@@ -14,7 +14,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { MISSION_RANKS, MissionRank } from '@/lib/ranks';
+import { MISSION_RANKS } from '@/lib/ranks';
+import type { MissionRankName } from '@/lib/types';
 import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
@@ -25,7 +26,7 @@ const formSchema = z.object({
 });
 
 interface TaskFormProps {
-  onAddTask: (title: string, rank: MissionRank) => void;
+  onAddTask: (title: string, rank: MissionRankName) => void;
 }
 
 export function TaskForm({ onAddTask }: TaskFormProps) {
@@ -38,12 +39,12 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    onAddTask(values.title, values.rank as MissionRank);
+    onAddTask(values.title, values.rank as MissionRankName);
     form.reset();
   }
 
   return (
-    <Card className="mx-4 md:mx-8">
+    <Card>
       <CardHeader>
         <CardTitle>New Mission</CardTitle>
       </CardHeader>
@@ -73,7 +74,7 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="flex gap-4"
+                      className="flex gap-4 flex-wrap"
                     >
                       {Object.values(MISSION_RANKS).map((rank) => (
                         <FormItem
