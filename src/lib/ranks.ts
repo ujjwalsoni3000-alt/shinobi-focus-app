@@ -3,12 +3,12 @@ import { Badge, Bot, School, Shield, Crown, Eye, Swords } from 'lucide-react';
 
 export const ranks: NinjaRank[] = [
   { name: 'Academy Student', minChakra: 0, icon: School },
-  { name: 'Genin', minChakra: 10, icon: Badge },
-  { name: 'Chunin', minChakra: 15, icon: Shield },
-  { name: 'Jonin', minChakra: 30, icon: Bot },
-  { name: 'ANBU Black Ops', minChakra: 50, icon: Eye },
-  { name: 'Sannin', minChakra: 100, icon: Swords },
-  { name: 'Kage', minChakra: 200, icon: Crown },
+  { name: 'Genin', minChakra: 20, icon: Badge },
+  { name: 'Chunin', minChakra: 50, icon: Shield },
+  { name: 'Jonin', minChakra: 100, icon: Bot },
+  { name: 'ANBU Black Ops', minChakra: 250, icon: Eye },
+  { name: 'Sannin', minChakra: 500, icon: Swords },
+  { name: 'Kage', minChakra: 1000, icon: Crown },
 ];
 
 export const MISSION_RANKS: Record<MissionRankName, MissionRankDetails> = {
