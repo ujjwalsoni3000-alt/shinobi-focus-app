@@ -1,5 +1,3 @@
-# Firebase Studio
+# Shinobi Focus
 
-This is a NextJS starter in Firebase Studio.
-
-To get started, take a look at src/app/page.tsx.
+A Naruto-themed productivity app to channel your inner ninja, built with Next.js and Firebase. Track your daily missions, expend chakra, and rise through the ninja ranks from Academy Student to Kage.
