@@ -5,7 +5,6 @@ import { Header } from '@/components/shinobi-focus/Header';
 import { ProgressDashboard } from '@/components/shinobi-focus/ProgressDashboard';
 import { TaskForm } from '@/components/shinobi-focus/TaskForm';
 import { TaskList } from '@/components/shinobi-focus/TaskList';
-import { MissionLog } from '@/components/shinobi-focus/MissionLog';
 import type { Task } from '@/lib/types';
 import type { MissionRankName } from '@/lib/types';
 import { MISSION_RANKS } from '@/lib/ranks';
@@ -78,7 +77,7 @@ export default function Home() {
       <Header />
       <ProgressDashboard tasks={tasks} userName={USER_NAME} />
       <div className="container mx-auto max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
-        <div className="space-y-8">
+        <div className="space-y-8 md:col-span-2">
           <TaskForm onAddTask={handleAddTask} />
           <TaskList 
             tasks={pendingTasks} 
@@ -86,7 +85,6 @@ export default function Home() {
             onDelete={handleDeleteTask}
           />
         </div>
-        <MissionLog allTasks={tasks} />
       </div>
       <footer className="text-center p-8 text-muted-foreground text-sm">
         <p>Train hard, {USER_NAME}. Your path to greatness awaits.</p>

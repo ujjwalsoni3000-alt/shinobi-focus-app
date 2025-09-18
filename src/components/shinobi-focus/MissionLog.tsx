@@ -18,7 +18,7 @@ export function MissionLog({ allTasks }: MissionLogProps) {
     const completedOnDay = date ? allTasks.filter(task => task.completedAt && isSameDay(task.completedAt, date)) : [];
 
     return (
-        <Card>
+        <Card className="w-full">
             <CardHeader>
                 <CardTitle>Mission Log</CardTitle>
                 <CardDescription>Review your daily progress.</CardDescription>
