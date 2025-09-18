@@ -14,11 +14,11 @@ export function ProgressDashboard({ tasks, userName }: ProgressDashboardProps) {
   const tasksCompletedCount = completedTasks.length;
   const totalChakra = completedTasks.reduce((sum, task) => sum + task.chakra, 0);
 
-  const currentRank = getRank(tasksCompletedCount);
-  const nextRank = getNextRank(tasksCompletedCount);
+  const currentRank = getRank(totalChakra);
+  const nextRank = getNextRank(totalChakra);
   
   const progressToNextRank = nextRank
-    ? ((tasksCompletedCount - currentRank.minTasks) / (nextRank.minTasks - currentRank.minTasks)) * 100
+    ? ((totalChakra - currentRank.minChakra) / (nextRank.minChakra - currentRank.minChakra)) * 100
     : 100;
 
   return (
@@ -33,7 +33,7 @@ export function ProgressDashboard({ tasks, userName }: ProgressDashboardProps) {
           {nextRank ? (
             <>
               <p className="text-xs text-muted-foreground">
-                {nextRank.minTasks - tasksCompletedCount} missions to {nextRank.name}
+                {nextRank.minChakra - totalChakra} chakra to {nextRank.name}
               </p>
               <Progress value={progressToNextRank} className="mt-2 h-2" />
             </>

@@ -7,6 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { ShurikenIcon } from '@/components/icons/ShurikenIcon';
 import { ChakraIcon } from '@/components/icons/ChakraIcon';
 import { cn } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
 
 interface TaskItemProps {
   task: Task;
@@ -46,10 +47,10 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
         >
           {task.title}
         </label>
+        <Badge variant="outline">{task.rank}-Rank</Badge>
         <div className="flex items-center gap-1" title={`${task.chakra} Chakra`}>
-          {Array.from({ length: task.chakra }).map((_, i) => (
-            <ChakraIcon key={i} className="h-4 w-4 text-accent" />
-          ))}
+           <ChakraIcon className="h-4 w-4 text-accent" />
+           <span className="text-sm font-bold text-accent">{task.chakra}</span>
         </div>
         <Button
           variant="ghost"

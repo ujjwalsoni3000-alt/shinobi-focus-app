@@ -6,6 +6,8 @@ import { ProgressDashboard } from '@/components/shinobi-focus/ProgressDashboard'
 import { TaskForm } from '@/components/shinobi-focus/TaskForm';
 import { TaskList } from '@/components/shinobi-focus/TaskList';
 import type { Task } from '@/lib/types';
+import type { MissionRankName } from '@/lib/types';
+import { MISSION_RANKS } from '@/lib/ranks';
 
 const USER_NAME = 'Young Shinobi';
 
@@ -35,11 +37,12 @@ export default function Home() {
     }
   }, [tasks, isMounted]);
 
-  const handleAddTask = (title: string, chakra: number) => {
+  const handleAddTask = (title: string, rank: MissionRankName) => {
     const newTask: Task = {
       id: crypto.randomUUID(),
       title,
-      chakra,
+      rank,
+      chakra: MISSION_RANKS[rank].chakra,
       completed: false,
     };
     setTasks([newTask, ...tasks]);
